@@ -1,10 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>변태력 테스트</title>
+        <!-- 구글폰트 -->
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+        <style type="text/css">
+            * {
+                text-align : center;
+                font-family: 'Stylish', sans-serif;
+            }
+
+            .wrap {
+                width: 900px;
+                margin: auto;
+            }
+
+            .comment {
+                color: blue;
+                font-weight: bold;
+            }
+
+            #post-box {
+                width: 500px;
+                margin: 20px auto;
+                padding: 50px;
+                border: black solid;
+                border-radius: 5px;
+            }
+        </style>
+        <script>
+            $(document).ready(function () {
+                $("#cards-box").empty();
+                showPost();
+            });
+
+            function showPost() {
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://spartacodingclub.shop/post",
+                    data: {},
+                    success: function (response) {
+                        let articles = response["articles"];
+                        for (let i = 0; i < articles.length; i++) {
+                            let article = articles[i];
+                            makeCard(article["image"], article["url"], article["title"], article["desc"], article["comment"])
+                        }
+                    }
+                });
+            }
+
+            function makeCard(image, url, title, desc, comment) {
+                let tempHtml = `<div class="card">
+    <img class="card-img-top" src="${image}" alt="Card image cap">
+    <div class="card-body">
+      <a href="${url}" target="_blank" class="card-title">${title}</a>
+      <p class="card-text">${desc}</p>
+      <p class="card-text comment">${comment}</p>
+    </div>
+  </div>`;
+                $("#cards-box").append(tempHtml);
+            }
+
+            function openClose() {
+                // id 값 post-box의 display 값이 block 이면(= 눈에 보이면)
+                if ($("#post-box").css("display") == "block") {
+                    // post-box를 가리고
+                    $("#post-box").hide();
+                    // 다시 버튼을 클릭하면, 박스 열기를 할 수 있게 텍스트 바꿔두기
+                    $("#btn-post-box").text('다음');
+                } else {
+                    // 아니면(눈에 보이지 않으면) post-box를 펴라
+                    $("#post-box").show();
+                    // 다시 버튼을 클릭하면, 박스 닫기를 할 수 있게 텍스트 바꿔두기
+                    $("#btn-post-box").text("끝");
+                }
+            }
+        </script>
     </head>
     <body>
-        
+<div class="jumbotron">
+                <h1 class="display-4">변태력 테스트</h1>
+                <p class="lead">나의 숨겨진 변태력은?</p>
+                <hr class="my-4">
+                <p class="lead">
+                    <button onclick="openClose()" id="btn-post-box" type="button" class="btn btn-primary">변태력 알아보기</button>
+                    <div id="livereAd" style="width:100%; text-align:center; margin-bottom:5px; display:inline-block;">
+                        <iframe src="https://ads-partners.coupang.com/widgets.html?id=17498&amp;width=300&amp;height=250&amp;subId=2XPV0099" class="lv-ad-a" frameborder="0" marginwidth="0" marginheight="0" paddingwidth="0" paddingheight="0" scrolling="no" width="300" height="250"></iframe>
+                        <iframe src="https://ads-partners.coupang.com/widgets.html?id=17498&amp;width=300&amp;height=250&amp;subId=2XPV0099" class="lv-ad-b" frameborder="0" marginwidth="0" marginheight="0" paddingwidth="0" paddingheight="0" scrolling="no" width="300" height="250"></iframe>
+                    </div>
+                </p>
+            </div>
     </body>
 </html>
