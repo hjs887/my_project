@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>변태력 테스트</title>
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <!-- 구글폰트 -->
         <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
         <style type="text/css">
@@ -32,7 +34,8 @@
         <script>
             $(document).ready(function () {
                 $("#cards-box").empty();
-                showPost();
+                $('#post-box').hide();
+                // showPost();
             });
 
             function showPost() {
@@ -52,14 +55,15 @@
             }
 
             function makeCard(image, url, title, desc, comment) {
-                let tempHtml = `<div class="card">
-    <img class="card-img-top" src="${image}" alt="Card image cap">
-    <div class="card-body">
-      <a href="${url}" target="_blank" class="card-title">${title}</a>
-      <p class="card-text">${desc}</p>
-      <p class="card-text comment">${comment}</p>
-    </div>
-  </div>`;
+                let tempHtml = `
+                    <div class="card">
+                        <img class="card-img-top" src="${image}" alt="Card image cap">
+                            <div class="card-body">
+                                <a href="${url}" target="_blank" class="card-title">${title}</a>
+                                <p class="card-text">${desc}</p>
+                                <p class="card-text comment">${comment}</p>
+                            </div>
+                    </div>`;
                 $("#cards-box").append(tempHtml);
             }
 
@@ -69,12 +73,12 @@
                     // post-box를 가리고
                     $("#post-box").hide();
                     // 다시 버튼을 클릭하면, 박스 열기를 할 수 있게 텍스트 바꿔두기
-                    $("#btn-post-box").text('다음');
+                    $("#btn-post-box").text('테스트해보기');
                 } else {
                     // 아니면(눈에 보이지 않으면) post-box를 펴라
                     $("#post-box").show();
                     // 다시 버튼을 클릭하면, 박스 닫기를 할 수 있게 텍스트 바꿔두기
-                    $("#btn-post-box").text("끝");
+                    //$("#btn-post-box").text("");
                 }
             }
         </script>
@@ -86,11 +90,27 @@
                 <hr class="my-4">
                 <p class="lead">
                     <button onclick="openClose()" id="btn-post-box" type="button" class="btn btn-primary">변태력 알아보기</button>
-                    <div id="livereAd" style="width:100%; text-align:center; margin-bottom:5px; display:inline-block;">
+                </p>
+            </div>
+        <div id="post-box" class="form-post">
+                <div>
+                    <div class="form-group">
+                        <label for="post-url">나는 입술에 생긴 각질은 꼭 떼고 만다.</label>
+                    <form>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
+                            <label class="form-check-label" for="disabledFieldsetCheck">YES</label>
+                            <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
+                            <label class="form-check-label" for="disabledFieldsetCheck">No</label>
+                        </div>
+                    </form>
+                    <button type="button" class="btn btn-primary">다음 문제로 가기!</button>
+                </div>
+            </div>
+        </div>
+        <div id="livereAd" style="width:100%; text-align:center; margin-bottom:5px; display:inline-block;">
                         <iframe src="https://ads-partners.coupang.com/widgets.html?id=17498&amp;width=300&amp;height=250&amp;subId=2XPV0099" class="lv-ad-a" frameborder="0" marginwidth="0" marginheight="0" paddingwidth="0" paddingheight="0" scrolling="no" width="300" height="250"></iframe>
                         <iframe src="https://ads-partners.coupang.com/widgets.html?id=17498&amp;width=300&amp;height=250&amp;subId=2XPV0099" class="lv-ad-b" frameborder="0" marginwidth="0" marginheight="0" paddingwidth="0" paddingheight="0" scrolling="no" width="300" height="250"></iframe>
-                    </div>
-                </p>
             </div>
     </body>
 </html>
