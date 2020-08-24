@@ -1,82 +1,67 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="UTF-8">
-        <title>변태력 테스트</title>
-        <!-- JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <!-- 구글폰트 -->
-        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-        <style type="text/css">
-            * {
-                text-align : center;
-                font-family: 'Stylish', sans-serif;
-            }
-
-            .wrap {
-                width: 900px;
-                margin: auto;
-            }
-
-            .comment {
-                color: blue;
-                font-weight: bold;
-            }
-
-            #post-box {
-                width: 500px;
-                margin: 20px auto;
-                padding: 50px;
-                border: black solid;
-                border-radius: 5px;
-            }
-        </style>
-        <script>
-            $(document).ready(function () {
-                $("#cards-box").empty();
-                $('#post-box').hide();
-                // showPost();
-            });
-
-            function showPost() {
-
-                $.ajax({
-                    type: "GET",
-                    url: "http://spartacodingclub.shop/post",
-                    data: {},
-                    success: function (response) {
-                        let articles = response["articles"];
-                        for (let i = 0; i < articles.length; i++) {
-                            let article = articles[i];
-                            makeCard(article["image"], article["url"], article["title"], article["desc"], article["comment"])
-                        }
+<head>
+    <meta charset="UTF-8">
+    <title>변태력 테스트</title>
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- 구글폰트 -->
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <style type="text/css">
+        * {
+            text-align: center;
+            font-family: 'Stylish', sans-serif;
+        }
+        .wrap {
+            width: 900px;
+            margin: auto;
+        }
+        .comment {
+            color: blue;
+            font-weight: bold;
+        }
+        #post-box {
+            width: 500px;
+            margin: 20px auto;
+            padding: 50px;
+            border: black solid;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        function showPost() {
+            $.ajax({
+                type: "GET",
+                url: "http://spartacodingclub.shop/post",
+                data: {},
+                success: function (response) {
+                    let articles = response["articles"];
+                    for (let i = 0; i < articles.length; i++) {
+                        let article = articles[i];
+                        makeCard(article["image"], article["url"], article["title"], article["desc"], article["comment"])
                     }
-                });
-            }
-
-                    var questions = [
-            $('#q1'),
-            $('#q2'),
-            $('#q3')
-        ];
+                }
+            });
+        }
+        var question_count = 2;  // 전체 문제 개수
         var current_question = 0;  // 1번문제부터 시작한다
         // questions[0] 1번문제
         // questions[1] 2번문제
         var score = 0;
         $(document).ready(function () {
             $("#cards-box").html("");
-            showArticles();
             showQuestion(current_question);
         });
         // number 번 문제만 보여주고 다 가린다.
         // number는 0부터 시작
         function showQuestion(number) {
-            for (let i = 0; i < questions.length; i++) {
-                if (i != number) {  // number번째 문제가 아니라면...
-                    questions[i].hide();
+            var index = parseInt(number);
+            for (let i = 0; i < question_count; i++) {
+                if (i != index) {  // number번째 문제가 아니라면...
+                    $(`#q${i}`).hide();
                 }
-                if (i == number) {
-                    questions[i].show();
+                if (i == index) {
+                    $(`#q${i}`).show();
                 }
             }
         }
@@ -86,11 +71,11 @@
             } else {
             }
             current_question = current_question + 1; // 다음 문제로!
+            console.log(current_question)
             showQuestion(current_question);
         }
-
-            function makeCard(image, url, title, desc, comment) {
-                let tempHtml = `
+        function makeCard(image, url, title, desc, comment) {
+            let tempHtml = `
                     <div class="card">
                         <img class="card-img-top" src="${image}" alt="Card image cap">
                             <div class="card-body">
@@ -99,91 +84,104 @@
                                 <p class="card-text comment">${comment}</p>
                             </div>
                     </div>`;
-                $("#cards-box").append(tempHtml);
+            $("#cards-box").append(tempHtml);
+        }
+        function openClose() {
+            // id 값 post-box의 display 값이 block 이면(= 눈에 보이면)
+            if ($("#post-box").css("display") == "block") {
+                // post-box를 가리고
+                $("#post-box").hide();
+                // 다시 버튼을 클릭하면, 박스 열기를 할 수 있게 텍스트 바꿔두기
+                $("#btn-post-box").text('테스트해보기');
+            } else {
+                // 아니면(눈에 보이지 않으면) post-box를 펴라
+                $("#post-box").show();
+                // 다시 버튼을 클릭하면, 박스 닫기를 할 수 있게 텍스트 바꿔두기
+                //$("#btn-post-box").text("");
             }
-
-            function openClose() {
-                // id 값 post-box의 display 값이 block 이면(= 눈에 보이면)
-                if ($("#post-box").css("display") == "block") {
-                    // post-box를 가리고
-                    $("#post-box").hide();
-                    // 다시 버튼을 클릭하면, 박스 열기를 할 수 있게 텍스트 바꿔두기
-                    $("#btn-post-box").text('테스트해보기');
-                } else {
-                    // 아니면(눈에 보이지 않으면) post-box를 펴라
-                    $("#post-box").show();
-                    // 다시 버튼을 클릭하면, 박스 닫기를 할 수 있게 텍스트 바꿔두기
-                    //$("#btn-post-box").text("");
-                }
-            }
-        </script>
-    </head>
-    <body>
+        }
+    </script>
+</head>
+<body>
 <div class="jumbotron">
-                <h1 class="display-4">변태력 테스트</h1>
-                <p class="lead">나의 숨겨진 변태력은?</p>
-                <hr class="my-4">
-                <p class="lead">
-                    <button onclick="openClose()" id="btn-post-box" type="button" class="btn btn-primary">변태력 알아보기</button>
-                </p>
+    <h1 class="display-4">변태력 테스트</h1>
+    <p class="lead">나의 숨겨진 변태력은?</p>
+    <hr class="my-4">
+    <p class="lead">
+        <button onclick="openClose()" id="btn-post-box" type="button" class="btn btn-primary">변태력 알아보기</button>
+    </p>
+</div>
+<div id="post-box" class="form-post">
+    <div id="q0" , style="padding: 30px">
+        <label>나는 입술에 생긴 각질은 꼭 떼고 만다.</label>
+        <form>
+            <div class="form-group" , style="padding: 20px 10px 30px 10px">
+                <html>
+                <head>
+                    <title>체크박스 하나만 선택하기</title>
+                    <script type="text/javascript">
+                        function oneCheckbox(a) {
+                            var obj = document.getElementsByName("checkbox1");
+                            for (var i = 0; i < obj.length; i++) {
+                                if (obj[i] != a) {
+                                    obj[i].checked = false;
+                                }
+                            }
+                        }
+                    </script>
+                </head>
+                <body>
+                <form name="sendForm" method="get">
+                    <input type="checkbox" name="checkbox1" value="Yes" onclick="oneCheckbox(this)">Yes
+                    <input type="checkbox" name="checkbox1" value="No" onclick="oneCheckbox(this)">No
+                </form>
+                </body>
+                </html>
             </div>
-        <div id="post-box" class="form-post">
-                <div>
-                    <div class="q1", style="padding: 30px">
-                        <label>나는 입술에 생긴 각질은 꼭 떼고 만다.</label>
-                    <form>
-                            <div class="form-group", style="padding: 20px 10px 30px 10px">
-                                <html>
-                                <head>
-                                    <title>체크박스 하나만 선택하기</title>
-                                    <script type="text/javascript">
-                                    function oneCheckbox(a){var obj = document.getElementsByName("checkbox1");
-                                    for(var i=0; i<obj.length; i++){if(obj[i] != a){obj[i].checked = false;}}}
-                                    </script>
-                                </head>
-                                    <body>
-                                        <form name="sendForm" method="get" >
-                                            <input type="checkbox" name="checkbox1" value="Yes" onclick="oneCheckbox(this)">Yes
-                                            <input type="checkbox" name="checkbox1" value="No" onclick="oneCheckbox(this)">No
-                                        </form>
-                                    </body>
-                                </html>
-                            </div>
-                                <button class="btn btn-primary" type="submit">다음</button>
-                    </form>
-                    </div>
-                </div>
-        </div>
-        <div id="post-box" class="form-post">
-                <div>
-                    <div class="q2", style="padding: 30px">
-                        <label>살짝 구운 스테이크가 좋다.</label>
-                    <form>
-                            <div class="form-group", style="padding: 20px 10px 30px 10px">
-                                <html>
-                                <head>
-                                    <title>체크박스 하나만 선택하기</title>
-                                    <script type="text/javascript">
-                                    function oneCheckbox(a){var obj = document.getElementsByName("checkbox1");
-                                    for(var i=0; i<obj.length; i++){if(obj[i] != a){obj[i].checked = false;}}}
-                                    </script>
-                                </head>
-                                    <body>
-                                        <form name="sendForm" method="get" >
-                                            <input type="checkbox" name="checkbox1" value="Yes" onclick="oneCheckbox(this)">Yes
-                                            <input type="checkbox" name="checkbox1" value="No" onclick="oneCheckbox(this)">No
-                                        </form>
-                                    </body>
-                                </html>
-                            </div>
-                                <button class="btn btn-primary" type="submit">다음</button>
-                    </form>
-                    </div>
-                </div>
-        </div>
-        <div id="livereAd" style="width:100%; text-align:center; margin-bottom:5px; display:inline-block;">
-                        <iframe src="https://ads-partners.coupang.com/widgets.html?id=17498&amp;width=300&amp;height=250&amp;subId=2XPV0099" class="lv-ad-a" frameborder="0" marginwidth="0" marginheight="0" paddingwidth="0" paddingheight="0" scrolling="no" width="300" height="250"></iframe>
-                        <iframe src="https://ads-partners.coupang.com/widgets.html?id=17498&amp;width=300&amp;height=250&amp;subId=2XPV0099" class="lv-ad-b" frameborder="0" marginwidth="0" marginheight="0" paddingwidth="0" paddingheight="0" scrolling="no" width="300" height="250"></iframe>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(0)">다음</button>
+        </form>
+    </div>
+    <div id="q1" , style="padding: 30px">
+        <label>살짝 구운 스테이크가 좋다.</label>
+        <form>
+            <div class="form-group" , style="padding: 20px 10px 30px 10px">
+                <html>
+                <head>
+                    <title>체크박스 하나만 선택하기</title>
+                    <script type="text/javascript">
+                        function oneCheckbox(a) {
+                            var obj = document.getElementsByName("checkbox1");
+                            for (var i = 0; i < obj.length; i++) {
+                                if (obj[i] != a) {
+                                    obj[i].checked = false;
+                                }
+                            }
+                        }
+                    </script>
+                </head>
+                <body>
+                <form name="sendForm" method="get">
+                    <input type="checkbox" name="checkbox1" value="Yes" onclick="oneCheckbox(this)">Yes
+                    <input type="checkbox" name="checkbox1" value="No" onclick="oneCheckbox(this)">No
+                </form>
+                </body>
+                </html>
             </div>
-    </body>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+        </form>
+    </div>
+</div>
+<div id="post-box" class="form-post">
+    <div>
+    </div>
+</div>
+<div id="livereAd" style="width:100%; text-align:center; margin-bottom:5px; display:inline-block;">
+    <iframe src="https://ads-partners.coupang.com/widgets.html?id=17498&amp;width=300&amp;height=250&amp;subId=2XPV0099"
+            class="lv-ad-a" frameborder="0" marginwidth="0" marginheight="0" paddingwidth="0" paddingheight="0"
+            scrolling="no" width="300" height="250"></iframe>
+    <iframe src="https://ads-partners.coupang.com/widgets.html?id=17498&amp;width=300&amp;height=250&amp;subId=2XPV0099"
+            class="lv-ad-b" frameborder="0" marginwidth="0" marginheight="0" paddingwidth="0" paddingheight="0"
+            scrolling="no" width="300" height="250"></iframe>
+</div>
+</body>
 </html>
