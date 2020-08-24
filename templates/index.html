@@ -98,12 +98,21 @@
                         <label>나는 입술에 생긴 각질은 꼭 떼고 만다.</label>
                     <form>
                             <div class="form-group", style="padding: 20px 10px 30px 10px">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="validCheck" required>
-                                    <label class="form-check-label" for="invalidCheck">Yes</label>
-                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                                    <label class="form-check-label" for="invalidCheck">No</label>
-                                 </div>
+                                <html>
+                                <head>
+                                    <title>체크박스 하나만 선택하기</title>
+                                    <script type="text/javascript">
+                                    function oneCheckbox(a){var obj = document.getElementsByName("checkbox1");
+                                    for(var i=0; i<obj.length; i++){if(obj[i] != a){obj[i].checked = false;}}}
+                                    </script>
+                                </head>
+                                    <body>
+                                        <form name="sendForm" method="get" >
+                                            <input type="checkbox" name="checkbox1" value="Yes" onclick="oneCheckbox(this)">Yes
+                                            <input type="checkbox" name="checkbox1" value="No" onclick="oneCheckbox(this)">No
+                                        </form>
+                                    </body>
+                                </html>
                             </div>
                                 <button class="btn btn-primary" type="submit">다음</button>
                     </form>
