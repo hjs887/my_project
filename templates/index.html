@@ -25,21 +25,7 @@
         }
     </style>
     <script>
-        function showPost() {
-            $.ajax({
-                type: "GET",
-                url: "http://spartacodingclub.shop/post",
-                data: {},
-                success: function (response) {
-                    let articles = response["articles"];
-                    for (let i = 0; i < articles.length; i++) {
-                        let article = articles[i];
-                        makeCard(article["image"], article["url"], article["title"], article["desc"], article["comment"])
-                    }
-                }
-            });
-        }
-        var question_count = 2;  // 전체 문제 개수
+        var question_count = 10;  // 전체 문제 개수
         var current_question = 0;  // 1번문제부터 시작한다
         // questions[0] 1번문제
         // questions[1] 2번문제
@@ -62,7 +48,7 @@
             }
         }
         function clickQuestion(answer) {
-            if (answer == 'yes') {
+            if (answer == 'Yes') {
                 answer = answer + 10;
             } else {
             }
@@ -84,16 +70,16 @@
         }
         function openClose() {
             // id 값 post-box의 display 값이 block 이면(= 눈에 보이면)
-            if ($("#post-box").css("display") == "block") {
+            if ($('#post-box').css('display') == 'block') {
                 // post-box를 가리고
-                $("#post-box").hide();
+                $('#post-box').hide();
                 // 다시 버튼을 클릭하면, 박스 열기를 할 수 있게 텍스트 바꿔두기
-                $("#btn-post-box").text('테스트해보기');
+                $('#btn-post-box').text('테스트해보기');
             } else {
                 // 아니면(눈에 보이지 않으면) post-box를 펴라
-                $("#post-box").show();
+                $('#post-box').show();
                 // 다시 버튼을 클릭하면, 박스 닫기를 할 수 있게 텍스트 바꿔두기
-                //$("#btn-post-box").text("");
+                $('#btn-post-box').text('');
             }
         }
     </script>
@@ -107,8 +93,8 @@
         <button onclick="openClose()" id="btn-post-box" type="button" class="btn btn-primary">변태력 알아보기</button>
     </p>
 </div>
-<div id="post-box" class="form-post">
-    <div id="q0" , style="padding: 30px">
+<div id="post-box" class="form-post" style="">
+    <div id="q0", style="padding: 30px">
         <label>나는 입술에 생긴 각질은 꼭 떼고 만다.</label>
         <form>
             <div class="form-group" , style="padding: 20px 10px 30px 10px">
@@ -137,8 +123,240 @@
             <button class="btn btn-primary" type="submit" onclick="clickQuestion(0)">다음</button>
         </form>
     </div>
-    <div id="q1" , style="padding: 30px">
+    <div id="q1", style="padding: 30px">
         <label>살짝 구운 스테이크가 좋다.</label>
+        <form>
+            <div class="form-group" , style="padding: 20px 10px 30px 10px">
+                <html>
+                <head>
+                    <title>체크박스 하나만 선택하기</title>
+                    <script type="text/javascript">
+                        function oneCheckbox(a) {
+                            var obj = document.getElementsByName("checkbox1");
+                            for (var i = 0; i < obj.length; i++) {
+                                if (obj[i] != a) {
+                                    obj[i].checked = false;
+                                }
+                            }
+                        }
+                    </script>
+                </head>
+                <body>
+                <form name="sendForm" method="get">
+                    <input type="checkbox" name="checkbox1" value="Yes" onclick="oneCheckbox(this)">Yes
+                    <input type="checkbox" name="checkbox1" value="No" onclick="oneCheckbox(this)">No
+                </form>
+                </body>
+                </html>
+            </div>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+        </form>
+    </div>
+    <div id="q2", style="padding: 30px">
+        <label>귀를 만져주는 것이 좋다.</label>
+        <form>
+            <div class="form-group" , style="padding: 20px 10px 30px 10px">
+                <html>
+                <head>
+                    <title>체크박스 하나만 선택하기</title>
+                    <script type="text/javascript">
+                        function oneCheckbox(a) {
+                            var obj = document.getElementsByName("checkbox1");
+                            for (var i = 0; i < obj.length; i++) {
+                                if (obj[i] != a) {
+                                    obj[i].checked = false;
+                                }
+                            }
+                        }
+                    </script>
+                </head>
+                <body>
+                <form name="sendForm" method="get">
+                    <input type="checkbox" name="checkbox1" value="Yes" onclick="oneCheckbox(this)">Yes
+                    <input type="checkbox" name="checkbox1" value="No" onclick="oneCheckbox(this)">No
+                </form>
+                </body>
+                </html>
+            </div>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+        </form>
+    </div>
+    <div id="q3", style="padding: 30px">
+        <label>오믈렛보단 달걀 프라이가 더 좋다.</label>
+        <form>
+            <div class="form-group" , style="padding: 20px 10px 30px 10px">
+                <html>
+                <head>
+                    <title>체크박스 하나만 선택하기</title>
+                    <script type="text/javascript">
+                        function oneCheckbox(a) {
+                            var obj = document.getElementsByName("checkbox1");
+                            for (var i = 0; i < obj.length; i++) {
+                                if (obj[i] != a) {
+                                    obj[i].checked = false;
+                                }
+                            }
+                        }
+                    </script>
+                </head>
+                <body>
+                <form name="sendForm" method="get">
+                    <input type="checkbox" name="checkbox1" value="Yes" onclick="oneCheckbox(this)">Yes
+                    <input type="checkbox" name="checkbox1" value="No" onclick="oneCheckbox(this)">No
+                </form>
+                </body>
+                </html>
+            </div>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+        </form>
+    </div>
+    <div id="q4", style="padding: 30px">
+        <label>물집은 꼭 터트려야 한다.</label>
+        <form>
+            <div class="form-group" , style="padding: 20px 10px 30px 10px">
+                <html>
+                <head>
+                    <title>체크박스 하나만 선택하기</title>
+                    <script type="text/javascript">
+                        function oneCheckbox(a) {
+                            var obj = document.getElementsByName("checkbox1");
+                            for (var i = 0; i < obj.length; i++) {
+                                if (obj[i] != a) {
+                                    obj[i].checked = false;
+                                }
+                            }
+                        }
+                    </script>
+                </head>
+                <body>
+                <form name="sendForm" method="get">
+                    <input type="checkbox" name="checkbox1" value="Yes" onclick="oneCheckbox(this)">Yes
+                    <input type="checkbox" name="checkbox1" value="No" onclick="oneCheckbox(this)">No
+                </form>
+                </body>
+                </html>
+            </div>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+        </form>
+    </div>
+    <div id="q5", style="padding: 30px">
+        <label>연필을 뾰족하게 깎는 것을 선호한다.</label>
+        <form>
+            <div class="form-group" , style="padding: 20px 10px 30px 10px">
+                <html>
+                <head>
+                    <title>체크박스 하나만 선택하기</title>
+                    <script type="text/javascript">
+                        function oneCheckbox(a) {
+                            var obj = document.getElementsByName("checkbox1");
+                            for (var i = 0; i < obj.length; i++) {
+                                if (obj[i] != a) {
+                                    obj[i].checked = false;
+                                }
+                            }
+                        }
+                    </script>
+                </head>
+                <body>
+                <form name="sendForm" method="get">
+                    <input type="checkbox" name="checkbox1" value="Yes" onclick="oneCheckbox(this)">Yes
+                    <input type="checkbox" name="checkbox1" value="No" onclick="oneCheckbox(this)">No
+                </form>
+                </body>
+                </html>
+            </div>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+        </form>
+    </div>
+    <div id="q6", style="padding: 30px">
+        <label>여드름은 짜야한다.</label>
+        <form>
+            <div class="form-group" , style="padding: 20px 10px 30px 10px">
+                <html>
+                <head>
+                    <title>체크박스 하나만 선택하기</title>
+                    <script type="text/javascript">
+                        function oneCheckbox(a) {
+                            var obj = document.getElementsByName("checkbox1");
+                            for (var i = 0; i < obj.length; i++) {
+                                if (obj[i] != a) {
+                                    obj[i].checked = false;
+                                }
+                            }
+                        }
+                    </script>
+                </head>
+                <body>
+                <form name="sendForm" method="get">
+                    <input type="checkbox" name="checkbox1" value="Yes" onclick="oneCheckbox(this)">Yes
+                    <input type="checkbox" name="checkbox1" value="No" onclick="oneCheckbox(this)">No
+                </form>
+                </body>
+                </html>
+            </div>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+        </form>
+    </div>
+    <div id="q7", style="padding: 30px">
+        <label>물집을 터트리는 걸 좋아한다.</label>
+        <form>
+            <div class="form-group" , style="padding: 20px 10px 30px 10px">
+                <html>
+                <head>
+                    <title>체크박스 하나만 선택하기</title>
+                    <script type="text/javascript">
+                        function oneCheckbox(a) {
+                            var obj = document.getElementsByName("checkbox1");
+                            for (var i = 0; i < obj.length; i++) {
+                                if (obj[i] != a) {
+                                    obj[i].checked = false;
+                                }
+                            }
+                        }
+                    </script>
+                </head>
+                <body>
+                <form name="sendForm" method="get">
+                    <input type="checkbox" name="checkbox1" value="Yes" onclick="oneCheckbox(this)">Yes
+                    <input type="checkbox" name="checkbox1" value="No" onclick="oneCheckbox(this)">No
+                </form>
+                </body>
+                </html>
+            </div>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+        </form>
+    </div>
+    <div id="q8", style="padding: 30px">
+        <label>간지럼을 잘 참는다.</label>
+        <form>
+            <div class="form-group" , style="padding: 20px 10px 30px 10px">
+                <html>
+                <head>
+                    <title>체크박스 하나만 선택하기</title>
+                    <script type="text/javascript">
+                        function oneCheckbox(a) {
+                            var obj = document.getElementsByName("checkbox1");
+                            for (var i = 0; i < obj.length; i++) {
+                                if (obj[i] != a) {
+                                    obj[i].checked = false;
+                                }
+                            }
+                        }
+                    </script>
+                </head>
+                <body>
+                <form name="sendForm" method="get">
+                    <input type="checkbox" name="checkbox1" value="Yes" onclick="oneCheckbox(this)">Yes
+                    <input type="checkbox" name="checkbox1" value="No" onclick="oneCheckbox(this)">No
+                </form>
+                </body>
+                </html>
+            </div>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+        </form>
+    </div>
+    <div id="q9", style="padding: 30px">
+        <label>아픈 것을 잘 참는 편이다.</label>
         <form>
             <div class="form-group" , style="padding: 20px 10px 30px 10px">
                 <html>
