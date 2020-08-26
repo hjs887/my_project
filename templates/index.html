@@ -113,7 +113,6 @@
                             for (var i = 0; i < obj.length; i++) {
                                 if (obj[i] != a) {
                                     obj[i].checked = false;
-                                    if ($('input[name="checkbox0"][value="Yes"]').is(':checked') == true) { count += 10 }
                                 }
                             }
                         }
@@ -123,6 +122,16 @@
                 <form name="sendForm" method="get">
                     <input type="checkbox" name="checkbox0" value="Yes" onclick="oneCheckbox(this)">Yes
                     <input type="checkbox" name="checkbox0" value="No" onclick="oneCheckbox(this)">No
+                    <head>
+                        <script type="text/javascript">
+                            function clickQuestion(answer) {
+                            if ($(`input[name="checkbox0${current_question}"] [value="Yes"]`).is(':checked') == true) { score +=1 }
+                            current_question =+ 1;
+                            console.log(current_question0)
+                            showQuestion(current_question)
+                            }
+                        </script>
+                    </head>
                 </form>
                 </body>
                 </html>
