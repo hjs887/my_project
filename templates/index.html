@@ -47,13 +47,17 @@
                 }
             }
         }
-        function clickQuestion(answer) {
-            if (answer == 'Yes') {
-                answer = answer + 10;
+        function clickQuestion(questionNumber) {
+            // input - 태그 조건
+            // [name="checkbox${questionNumber}"][value="Yes"] - 태그 속성 조건
+            // .is(':checked') - 체크박스를 선택했는지 여부(true/false)
+            if ($(`input[name="checkbox${questionNumber}"][value="Yes"]`).is(':checked')) {
+                score = score + 10;
             } else {
             }
             current_question = current_question + 1; // 다음 문제로!
             console.log(current_question)
+            console.log('현재점수' + score)
             showQuestion(current_question);
         }
         function makeCard(image, url, title, desc, comment) {
@@ -194,7 +198,7 @@
                 </body>
                 </html>
             </div>
-            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(2)">다음</button>
         </form>
     </div>
     <div id="q4", style="padding: 30px">
@@ -223,7 +227,7 @@
                 </body>
                 </html>
             </div>
-            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(3)">다음</button>
         </form>
     </div>
     <div id="q5", style="padding: 30px">
@@ -252,7 +256,7 @@
                 </body>
                 </html>
             </div>
-            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(4)">다음</button>
         </form>
     </div>
     <div id="q6", style="padding: 30px">
@@ -281,11 +285,11 @@
                 </body>
                 </html>
             </div>
-            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(5)">다음</button>
         </form>
     </div>
     <div id="q7", style="padding: 30px">
-        <label>여드름은 짜야한다.</label>
+        <label>여드름은 꼭 짜야한다.</label>
         <form>
             <div class="form-group" , style="padding: 20px 10px 30px 10px">
                 <html>
@@ -310,7 +314,7 @@
                 </body>
                 </html>
             </div>
-            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(6)">다음</button>
         </form>
     </div>
     <div id="q8", style="padding: 30px">
@@ -339,7 +343,7 @@
                 </body>
                 </html>
             </div>
-            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(7)">다음</button>
         </form>
     </div>
     <div id="q9", style="padding: 30px">
@@ -368,7 +372,7 @@
                 </body>
                 </html>
             </div>
-            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(8)">다음</button>
         </form>
     </div>
     <div id="q10", style="padding: 30px">
@@ -397,7 +401,7 @@
                 </body>
                 </html>
             </div>
-            <button class="btn btn-primary" type="submit" onclick="clickQuestion(1)">다음</button>
+            <button class="btn btn-primary" type="submit" onclick="clickQuestion(9)">다음</button>
         </form>
     </div>
 </div>
