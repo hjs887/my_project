@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>변태력 테스트</title>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- 구글폰트 -->
@@ -51,6 +53,17 @@
             // input - 태그 조건
             // [name="checkbox${questionNumber}"][value="Yes"] - 태그 속성 조건
             // .is(':checked') - 체크박스를 선택했는지 여부(true/false)
+            if(current_question == 10){
+                $.ajax({
+                    type:"POST",
+                    url: "api/result",
+                    data: { 'score' : score},
+                    success: function (response){
+                        alert("server test!!!");
+
+                    }
+                })
+            }
             if ($(`input[name="checkbox${questionNumber}"][value="Yes"]`).is(':checked')) {
                 score = score + 10;
             } else {
