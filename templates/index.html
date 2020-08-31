@@ -59,7 +59,9 @@
                     url: "api/result",
                     data: { 'score' : score},
                     success: function (response){
-                        alert("server test!!!");
+                        // alert("server test!!!");
+                        // alert(response["result"]);
+                        location.href = response["result"].toString();
 
                     }
                 })
